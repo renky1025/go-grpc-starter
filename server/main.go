@@ -56,6 +56,10 @@ func (s *server) GetProduct(ctx context.Context, req *product.ProductId) (resp *
 func (s *server) ListProduct(ctx context.Context, req *product.QueryRequest) (resp *product.ResponseDTO, err error) {
 	products := make([]*product.Product, 0, len(s.productMap))
 
+	for _, v := range s.productMap {
+		products = append(products, v)
+	}
+
 	resp = &product.ResponseDTO{
 		Code: 200,
 		Msg:  "ok",
