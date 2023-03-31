@@ -1,0 +1,53 @@
+syntax = "proto3";
+package product;
+option go_package = "./product";
+service ProductInfo {
+  //添加商品
+  rpc addProduct(Product) returns (ProductId);
+  //获取商品
+  rpc getProduct(ProductId) returns (ResponseSingleDTO);
+  //罗列商品
+  rpc listProduct(QueryRequest) returns (ResponseDTO);
+  //删除商品
+  rpc delProduct(ProductId) returns (ResponseBool);
+  //更新商品
+  rpc updateProduct(Product) returns (ResponseSingleDTO);
+}
+
+message Product {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message ProductId {
+  string value = 1;
+}
+message ResponseBool {
+  int32 code = 1;
+  string msg = 2;
+  bool data = 3;
+}
+message ProductUpdateDTO {
+  string name = 1;
+  string description = 2;
+}
+
+message QueryRequest {
+  string query = 1;
+  int32 pageSize = 2;
+  int32 pageNo = 3;
+}
+
+message ResponseSingleDTO {
+  int32 code = 1;
+  string msg = 2;
+  Product data = 3;
+}
+
+message ResponseDTO {
+  int32 code = 1;
+  string msg = 2;
+  repeated Product data = 3;
+}
+
